@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "314090304240",
+    "firebase_url": "https://projectlgbtq-e1400.firebaseio.com",
+    "project_id": "projectlgbtq-e1400",
+    "storage_bucket": "projectlgbtq-e1400.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314090304240:android:708de9d3e6d4e57b1fc835",
+        "android_client_info": {
+          "package_name": "com.projectX.selene"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "314090304240-v5sosfab96lfmjvnhnq556ev3jv5ea6c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.projectX.selene",
+            "certificate_hash": "d9db19e10db0021476536b01fd89d5d31894bb46"
+          }
+        },
+        {
+          "client_id": "314090304240-mq2pq9mdlphsfagcbv3ecqmrjasg8rjq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8KJZUc3jYc9kQ0D3Rz5-i53ewnU_8xS8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "314090304240-mq2pq9mdlphsfagcbv3ecqmrjasg8rjq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

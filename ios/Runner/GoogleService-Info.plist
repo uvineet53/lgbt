@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>314090304240-um2qbg6n09ncks3d092ndh484klm3lat.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.314090304240-um2qbg6n09ncks3d092ndh484klm3lat</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>314090304240-v5sosfab96lfmjvnhnq556ev3jv5ea6c.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCtQxdE0I2Qebe8bGPU_7N7toBS0RNDKd8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>314090304240</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.projectX.selene</string>
+	<key>PROJECT_ID</key>
+	<string>projectlgbtq-e1400</string>
+	<key>STORAGE_BUCKET</key>
+	<string>projectlgbtq-e1400.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:314090304240:ios:d1b661a403e97b2a1fc835</string>
+	<key>DATABASE_URL</key>
+	<string>https://projectlgbtq-e1400.firebaseio.com</string>
+</dict>
+</plist>
