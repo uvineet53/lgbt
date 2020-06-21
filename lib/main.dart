@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'pages/HomePage.dart';
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
@@ -15,12 +10,10 @@ class MyApp extends StatelessWidget {
       title: 'Selene',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.black,
-        dialogBackgroundColor: Colors.black,
-        primarySwatch: Colors.grey,
-        cardColor: Colors.white70,
-        accentColor: Colors.black,
-      ),
+          primaryColor: Colors.white,
+          scaffoldBackgroundColor: Colors.white,
+          appBarTheme: AppBarTheme(color: Colors.white),
+          accentColor: Colors.white),
       home: HomePage(),
     );
   }

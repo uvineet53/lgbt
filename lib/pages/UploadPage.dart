@@ -134,7 +134,7 @@ class _UploadPageState extends State<UploadPage>
   displayUploadFormScreen() {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -145,7 +145,7 @@ class _UploadPageState extends State<UploadPage>
         title: Text(
           "New Post",
           style: TextStyle(
-              fontSize: 24, color: Colors.white, fontWeight: FontWeight.bold),
+              fontSize: 24, color: Colors.black, fontWeight: FontWeight.bold),
         ),
         actions: <Widget>[
           FlatButton(
@@ -245,27 +245,27 @@ class _UploadPageState extends State<UploadPage>
         return SimpleDialog(
           title: Text(
             "New Post",
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
           children: <Widget>[
             SimpleDialogOption(
               child: Text(
                 "Capture Image with Camera",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.black),
               ),
               onPressed: captureImagewithCamera,
             ),
             SimpleDialogOption(
               child: Text(
                 "Select Image from Gallery",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.black),
               ),
               onPressed: pickImagefromGallery,
             ),
             SimpleDialogOption(
               child: Text(
                 "Cancel",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.black),
               ),
               onPressed: () {
                 Navigator.pop(context);

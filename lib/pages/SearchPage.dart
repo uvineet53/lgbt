@@ -38,14 +38,14 @@ class _SearchPageState extends State<SearchPage>
         child: ListView(
           shrinkWrap: true,
           children: <Widget>[
-            Icon(Icons.group, color: Colors.grey, size: 200.0),
+            Icon(Icons.group, color: Colors.grey[800], size: 200.0),
             Text(
               "Search Users",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontWeight: FontWeight.w500,
-                  fontSize: 65.0),
+                  fontSize: 48.0),
             )
           ],
         ),
@@ -73,28 +73,25 @@ class _SearchPageState extends State<SearchPage>
 
   AppBar searchPageHeader() {
     return AppBar(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
+      elevation: 0.0,
       title: TextFormField(
-        style: TextStyle(fontSize: 18.0, color: Colors.white),
+        style: TextStyle(fontSize: 18.0, color: Colors.black),
         controller: _searchController,
         decoration: InputDecoration(
+            fillColor: Colors.white,
             hintText: "Search Here...",
-            hintStyle: TextStyle(color: Colors.grey),
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey),
-            ),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.white),
-            ),
+            hintStyle: TextStyle(color: Colors.grey[800]),
+            border: InputBorder.none,
             filled: true,
             prefixIcon: Icon(
               Icons.person_pin,
-              color: Colors.white,
+              color: Colors.black,
               size: 30.0,
             ),
             suffixIcon: IconButton(
               icon: Icon(Icons.clear),
-              color: Colors.white,
+              color: Colors.black,
               onPressed: emptyTextformField,
             )),
         onFieldSubmitted: controlSearching,
@@ -122,7 +119,7 @@ class UserResult extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(4.0),
       child: Container(
-        color: Colors.white54,
+        color: Colors.white,
         child: Column(
           children: <Widget>[
             GestureDetector(
