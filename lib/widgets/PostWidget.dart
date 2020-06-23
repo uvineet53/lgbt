@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:buddiesgram/models/user.dart';
 import 'package:buddiesgram/pages/CommentsPage.dart';
 import 'package:buddiesgram/pages/HomePage.dart';
+import 'package:buddiesgram/pages/ProfilePage.dart';
 import 'package:buddiesgram/widgets/ProgressWidget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -121,7 +122,7 @@ class _PostState extends State<Post> {
             ),
             title: GestureDetector(
               onTap: () {
-                print("Show Profile");
+                displayUserProfile(context: context, profileId: user.id);
               },
               child: Text(
                 user.username,
@@ -146,6 +147,14 @@ class _PostState extends State<Post> {
                 : Text(""));
       },
     );
+  }
+
+  displayUserProfile({BuildContext context, String profileId}) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => ProfilePage(
+        userProfileId: profileId,
+      ),
+    ));
   }
 
   userLike() {
@@ -194,7 +203,7 @@ class _PostState extends State<Post> {
         "type": "like",
         "username": currentUser.username,
         "userId": currentUser.id,
-        "timestamp": timestamp,
+        "timestamp": DateTime.now(),
         "url": url,
         "postId": postId,
         "userProfileImage": currentUser.url

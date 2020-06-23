@@ -53,26 +53,33 @@ class CommentsPageState extends State<CommentsPage> {
           Expanded(
             child: displayComments(),
           ),
-          Divider(),
+          Divider(
+            color: Colors.grey[600],
+          ),
           ListTile(
-            title: TextFormField(
-              controller: commentController,
-              decoration: InputDecoration(
-                  labelText: "Write Comment Here",
-                  labelStyle: TextStyle(
-                    color: Colors.white,
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.grey,
-                    ),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
+            title: Container(
+              margin: EdgeInsets.only(
+                bottom: 30,
+              ),
+              child: TextFormField(
+                controller: commentController,
+                decoration: InputDecoration(
+                    labelText: "Write Comment Here",
+                    labelStyle: TextStyle(
                       color: Colors.black,
                     ),
-                  )),
-              style: TextStyle(color: Colors.black),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                      ),
+                    )),
+                style: TextStyle(color: Colors.black),
+              ),
             ),
             trailing: OutlineButton(
               onPressed: addComment,
@@ -100,12 +107,13 @@ class CommentsPageState extends State<CommentsPage> {
     if (isNotOwner) {
       activityReference.document(ownerId).collection("feedItems").add({
         "type": "comment",
-        "commentDate": timestamp,
+        "commentData": commentController.text,
         "postId": postId,
         "userId": currentUser.id,
         "username": currentUser.username,
         "userProfileImg": currentUser.url,
         "url": url,
+        "timestamp": DateTime.now()
       });
     }
     commentController.clear();
@@ -131,9 +139,12 @@ class Comment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 6),
+      padding: EdgeInsets.all(6),
       child: Container(
-        color: Colors.grey,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.grey[400],
+        ),
         child: Column(
           children: [
             ListTile(

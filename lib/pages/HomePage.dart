@@ -22,6 +22,8 @@ final StorageReference storageReference =
 final postsReference = Firestore.instance.collection("posts");
 final activityReference = Firestore.instance.collection("feed");
 final commentsReference = Firestore.instance.collection("comments");
+final followersReference = Firestore.instance.collection("followers");
+final followingReference = Firestore.instance.collection("following");
 
 class HomePage extends StatefulWidget {
   @override
@@ -186,11 +188,13 @@ class _HomePageState extends State<HomePage> {
     }, onError: (gError) {
       print("Error message: $gError");
     });
-    gSignIn.signInSilently(suppressErrors: false).then((gSignInAccount) {
-      controlSignIn(gSignInAccount);
-    }).catchError((gError) {
-      print("Error message: $gError");
-    });
+    isSignedIn
+        ? gSignIn.signInSilently(suppressErrors: false).then((gSignInAccount) {
+            controlSignIn(gSignInAccount);
+          }).catchError((gError) {
+            print("Error message: $gError");
+          })
+        : "";
   }
 
   void dispose() {

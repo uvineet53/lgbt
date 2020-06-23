@@ -122,7 +122,7 @@ class _UploadPageState extends State<UploadPage>
         .setData({
       "postId": postId,
       "owner Id": widget.gcurrentUser.id,
-      "timestamp": timestamp,
+      "timestamp": DateTime.now(),
       "likes": {},
       "username": widget.gcurrentUser.username,
       "description": description,

@@ -126,11 +126,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   logout() async {
     await gSignIn.signOut();
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ));
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => HomePage(),
+      ),
+    );
   }
 
   updateData() {
