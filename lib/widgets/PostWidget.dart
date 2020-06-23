@@ -1,6 +1,8 @@
+import 'dart:async';
+
 import 'package:buddiesgram/models/user.dart';
+import 'package:buddiesgram/pages/CommentsPage.dart';
 import 'package:buddiesgram/pages/HomePage.dart';
-import 'package:buddiesgram/widgets/CImageWidget.dart';
 import 'package:buddiesgram/widgets/ProgressWidget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -72,7 +74,8 @@ class _PostState extends State<Post> {
   final String location;
   final String url;
   int likeCount;
-  bool isLiked = false;
+  bool isLiked;
+  bool showHeart = false;
   final String currentUserId = currentUser.id;
 
   _PostState(
@@ -88,6 +91,7 @@ class _PostState extends State<Post> {
 
   @override
   Widget build(BuildContext context) {
+    isLiked = (likes[currentUserId] == true);
     return Padding(
       padding: EdgeInsets.only(bottom: 12),
       child: Column(
@@ -144,16 +148,104 @@ class _PostState extends State<Post> {
     );
   }
 
+  userLike() {
+    bool liked = likes[currentUserId] == true;
+    if (liked) {
+      postsReference
+          .document(ownerId)
+          .collection("userPosts")
+          .document(postId)
+          .updateData({"likes.$currentUserId": false});
+      removelike();
+      setState(() {
+        likeCount--;
+        isLiked = false;
+        likes[currentUserId] = false;
+      });
+    } else if (!liked) {
+      postsReference
+          .document(ownerId)
+          .collection("userPosts")
+          .document(postId)
+          .updateData({"likes.$currentUserId": true});
+      addlike();
+      setState(() {
+        likeCount++;
+        isLiked = true;
+        likes[currentUserId] = true;
+        showHeart = true;
+      });
+      Timer(Duration(milliseconds: 600), () {
+        setState(() {
+          showHeart = false;
+        });
+      });
+    }
+  }
+
+  addlike() {
+    bool noPostOwner = currentUserId != ownerId;
+    if (!noPostOwner) {
+      activityReference
+          .document(ownerId)
+          .collection("feedItems")
+          .document(postId)
+          .setData({
+        "type": "like",
+        "username": currentUser.username,
+        "userId": currentUser.id,
+        "timestamp": timestamp,
+        "url": url,
+        "postId": postId,
+        "userProfileImage": currentUser.url
+      });
+    }
+  }
+
+  removelike() {
+    bool noPostOwner = currentUserId != ownerId;
+    if (!noPostOwner) {
+      activityReference
+          .document(ownerId)
+          .collection("feedItems")
+          .document(postId)
+          .get()
+          .then((value) {
+        if (value.exists) {
+          value.reference.delete();
+        }
+      });
+    }
+  }
+
   postPicture() {
     return GestureDetector(
       onDoubleTap: () {
-        print("Liked");
+        userLike();
       },
       child: Stack(
         alignment: Alignment.center,
-        children: [Image.network(url)],
+        children: [
+          Image.network(url),
+          showHeart
+              ? Icon(
+                  Icons.favorite,
+                  size: 120,
+                  color: Colors.pink,
+                )
+              : Text("")
+        ],
       ),
     );
+  }
+
+  comments({BuildContext context, String postId, String ownerId, String url}) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              CommentsPage(postId: postId, ownerId: ownerId, url: url),
+        ));
   }
 
   postFooter() {
@@ -165,13 +257,12 @@ class _PostState extends State<Post> {
             Padding(padding: EdgeInsets.only(top: 40, left: 30)),
             GestureDetector(
               onTap: () {
-                print("Liked");
+                userLike();
               },
               child: Icon(
-                Icons.favorite, color: Colors.grey,
-                // isLiked ? Icons.favorite : Icons.favorite_border,
-                // size: 28,
-                // color: Colors.pink,
+                isLiked ? Icons.favorite : Icons.favorite_border,
+                size: 28,
+                color: Colors.pink,
               ),
             ),
             SizedBox(
@@ -179,7 +270,11 @@ class _PostState extends State<Post> {
             ),
             GestureDetector(
               onTap: () {
-                print("show Comments");
+                comments(
+                    context: context,
+                    postId: postId,
+                    ownerId: ownerId,
+                    url: url);
               },
               child: Icon(
                 Icons.chat_bubble_outline,

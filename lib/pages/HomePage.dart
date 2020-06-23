@@ -20,6 +20,8 @@ User currentUser;
 final StorageReference storageReference =
     FirebaseStorage.instance.ref().child("Posts Pictures");
 final postsReference = Firestore.instance.collection("posts");
+final activityReference = Firestore.instance.collection("feed");
+final commentsReference = Firestore.instance.collection("comments");
 
 class HomePage extends StatefulWidget {
   @override

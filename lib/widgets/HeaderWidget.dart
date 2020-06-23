@@ -4,7 +4,7 @@ AppBar header(context,
     {bool isAppTitle = false, String strTitle, disableBackButton = false}) {
   return AppBar(
     elevation: 0.0,
-    iconTheme: IconThemeData(color: Colors.white),
+    iconTheme: IconThemeData(color: Colors.black),
     automaticallyImplyLeading: disableBackButton ? false : true,
     title: Text(
       isAppTitle ? "Selene" : strTitle,
