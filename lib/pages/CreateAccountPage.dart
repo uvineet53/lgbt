@@ -50,7 +50,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                       key: _formkey,
                       autovalidate: true,
                       child: TextFormField(
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.black),
                         validator: (val) {
                           if (val.trim().length < 5 || val.isEmpty) {
                             return "Username is very short";
