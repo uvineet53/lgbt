@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:buddiesgram/models/user.dart';
 import 'package:buddiesgram/pages/CommentsPage.dart';
 import 'package:buddiesgram/pages/HomePage.dart';
@@ -141,12 +140,82 @@ class _PostState extends State<Post> {
                       color: Colors.black,
                     ),
                     onPressed: () {
-                      print("Deleted");
+                      controlPostDelete(context);
                     },
                   )
                 : Text(""));
       },
     );
+  }
+
+  controlPostDelete(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return SimpleDialog(
+          title: Text(
+            "What do you want?",
+            style: TextStyle(color: Colors.black),
+          ),
+          children: [
+            SimpleDialogOption(
+              child: Text(
+                "Delete Post",
+                style:
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+                removePost();
+              },
+            ),
+            SimpleDialogOption(
+              child: Text(
+                "Cancel",
+                style:
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  removePost() async {
+    postsReference
+        .document(ownerId)
+        .collection("userPosts")
+        .document(postId)
+        .get()
+        .then((document) {
+      if (document.exists) {
+        document.reference.delete();
+      }
+    });
+    storageReference.child("post_$postId.jpg").delete();
+    QuerySnapshot querySnapshot = await activityReference
+        .document(ownerId)
+        .collection("feedItems")
+        .where("postId", isEqualTo: postId)
+        .getDocuments();
+    querySnapshot.documents.forEach((element) {
+      if (element.exists) {
+        element.reference.delete();
+      }
+    });
+    QuerySnapshot commentsQuerySnapshot = await commentsReference
+        .document(postId)
+        .collection("comments")
+        .getDocuments();
+    commentsQuerySnapshot.documents.forEach((document) {
+      if (document.exists) {
+        document.reference.delete();
+      }
+    });
   }
 
   displayUserProfile({BuildContext context, String profileId}) {

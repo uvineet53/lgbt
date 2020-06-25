@@ -147,14 +147,16 @@ class _UploadPageState extends State<UploadPage>
           style: TextStyle(
               fontSize: 24, color: Colors.black, fontWeight: FontWeight.bold),
         ),
+        elevation: 0.0,
+        iconTheme: IconThemeData(color: Colors.black),
         actions: <Widget>[
           FlatButton(
             onPressed: uploading ? null : () => controlUploadAndSave(),
             child: Text(
               "Share",
               style: TextStyle(
-                  color: Colors.lightGreenAccent,
-                  fontSize: 16.0,
+                  color: Colors.purple[800],
+                  fontSize: 20.0,
                   fontWeight: FontWeight.bold),
             ),
           )
@@ -186,11 +188,11 @@ class _UploadPageState extends State<UploadPage>
             title: Container(
               width: 250,
               child: TextField(
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.black),
                 controller: _descriptionController,
                 decoration: InputDecoration(
                     hintText: "Say something about the picture",
-                    hintStyle: TextStyle(color: Colors.white),
+                    hintStyle: TextStyle(color: Colors.black),
                     border: InputBorder.none),
               ),
             ),
@@ -199,17 +201,17 @@ class _UploadPageState extends State<UploadPage>
           ListTile(
             leading: Icon(
               Icons.person_pin,
-              color: Colors.white,
+              color: Colors.black,
               size: 36,
             ),
             title: Container(
               width: 250,
               child: TextField(
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.black),
                 controller: _locationController,
                 decoration: InputDecoration(
                     hintText: "Share the location",
-                    hintStyle: TextStyle(color: Colors.white),
+                    hintStyle: TextStyle(color: Colors.black),
                     border: InputBorder.none),
               ),
             ),
@@ -221,14 +223,14 @@ class _UploadPageState extends State<UploadPage>
             child: RaisedButton.icon(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(35)),
-              color: Colors.green,
+              color: Colors.purple[100],
               icon: Icon(
                 Icons.location_on,
-                color: Colors.white,
+                color: Colors.purple[800],
               ),
               label: Text(
                 "Get Current Location",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.purple[800]),
               ),
               onPressed: getUserLocation,
             ),

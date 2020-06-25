@@ -6,7 +6,6 @@ import 'package:buddiesgram/widgets/HeaderWidget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import 'ProfilePage.dart';
 
 class NotificationsPage extends StatefulWidget {
@@ -45,7 +44,9 @@ class _NotificationsPageState extends State<NotificationsPage> {
 
     List<NotificationsItem> notificationItem = [];
     querySnapshot.documents.forEach((element) {
-      notificationItem..add(NotificationsItem.fromDocument(element));
+      if (element.data.containsValue(currentUser.id) == false) {
+        notificationItem.add(NotificationsItem.fromDocument(element));
+      }
     });
     return notificationItem;
   }
@@ -80,7 +81,7 @@ class NotificationsItem extends StatelessWidget {
       commentData: snapshot["commentData"],
       postId: snapshot["postId"],
       userId: snapshot["userId"],
-      userProfileImg: snapshot["userProfileImg"],
+      userProfileImg: snapshot["userProfileImage"],
       url: snapshot["url"],
       timestamp: snapshot["timestamp"],
     );
@@ -127,7 +128,8 @@ class NotificationsItem extends StatelessWidget {
   configureMediaPreview(context) {
     if (type == "comment" || type == "like") {
       mediaPreview = GestureDetector(
-        onTap: () => displayPost(context),
+        onTap: () =>
+            displayOwnPost(context: context, profileId: currentUser.id),
         child: Container(
           height: 50,
           width: 50,
@@ -156,13 +158,12 @@ class NotificationsItem extends StatelessWidget {
     }
   }
 
-  displayPost(BuildContext context) {
+  displayOwnPost({BuildContext context, String profileId}) {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => PostScreenPage(
-            postId: postId,
-            userId: userId,
+          builder: (context) => ProfilePage(
+            userProfileId: currentUser.id,
           ),
         ));
   }

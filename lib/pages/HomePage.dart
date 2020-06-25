@@ -45,6 +45,11 @@ class _HomePageState extends State<HomePage> {
       await saveUserInfoToFirestore();
       setState(() {
         isSignedIn = true;
+        gSignIn.signInSilently(suppressErrors: false).then((gSignInAccount) {
+          controlSignIn(gSignInAccount);
+        }).catchError((gError) {
+          print("Error message: $gError");
+        });
       });
       configureRealtimePushNotifications();
     } else {
@@ -238,13 +243,6 @@ class _HomePageState extends State<HomePage> {
     }, onError: (gError) {
       print("Error message: $gError");
     });
-    isSignedIn
-        ? gSignIn.signInSilently(suppressErrors: false).then((gSignInAccount) {
-            controlSignIn(gSignInAccount);
-          }).catchError((gError) {
-            print("Error message: $gError");
-          })
-        : "";
   }
 
   void dispose() {
